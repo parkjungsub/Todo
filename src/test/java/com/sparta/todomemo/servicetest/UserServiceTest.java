@@ -22,7 +22,7 @@ public class UserServiceTest {
 
 
     @Test
-    @DisplayName("서비스 테스트")
+    @DisplayName("서비스 데이터 확인")
     @Transactional
     void UserSaveTest() {
         // given
