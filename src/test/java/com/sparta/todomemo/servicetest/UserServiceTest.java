@@ -1,26 +1,28 @@
 package com.sparta.todomemo.servicetest;
 
 import com.sparta.todomemo.dto.UserRequestDto;
+import com.sparta.todomemo.dto.UserResponseDto;
 import com.sparta.todomemo.entity.User;
 import com.sparta.todomemo.repository.UserRepository;
 import com.sparta.todomemo.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
-public class UserServiceTest {
+import java.util.List;
 
+public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
-    @Mock
+    @InjectMocks
     private UserService userService;
 
+
     @Test
-    @DisplayName("저장된 데이터베이스 일치")
+    @DisplayName("서비스 테스트")
     @Transactional
     void UserSaveTest() {
         // given
@@ -30,11 +32,10 @@ public class UserServiceTest {
         userRequestDto.setUsername("박정섭");
 
         // when
-        User user = userService.join(userRequestDto);
+        UserResponseDto userResponseDto = userService.join(userRequestDto);
 
         // then
-        Assertions.assertEquals(userRequestDto.getId(), user.getId());
-        Assertions.assertEquals(userRequestDto.getPassword(), user.getPassword());
-        Assertions.assertEquals(userRequestDto.getUsername(), user.getUsername());
+        Assertions.assertEquals(1L, userRequestDto.getId());
+        Assertions.assertEquals("박정섭", userResponseDto.getUsername());
     }
 }

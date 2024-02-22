@@ -5,6 +5,7 @@ import com.sparta.todomemo.dto.UserResponseDto;
 import com.sparta.todomemo.entity.User;
 import com.sparta.todomemo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +18,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public User join(UserRequestDto userRequestDto){
-        User user = new User(userRequestDto.getUsername(), userRequestDto.getPassword());
-        return userRepository.save(user);
+    public UserResponseDto join(UserRequestDto userRequestDto){
+        User user = userRepository.save(new User(userRequestDto.getUsername(), userRequestDto.getPassword()));
+        UserResponseDto userResponseDto = new UserResponseDto(user);
+
+        return userResponseDto;
     }
 
     public UserResponseDto Userfind(Long id){
