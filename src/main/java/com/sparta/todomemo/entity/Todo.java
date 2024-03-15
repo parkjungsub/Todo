@@ -21,9 +21,9 @@ public class Todo {
     private String content;
     @Column
     private LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-    @Column
-    @ManyToOne
-    private User user;
+//    @Column
+//    @ManyToOne
+//    private User user;
 
     public Todo(String name, String title, String content){
         this.name = name;

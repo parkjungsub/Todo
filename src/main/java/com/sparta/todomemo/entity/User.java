@@ -10,7 +10,7 @@ import java.util.List;
 @Entity(name = "users")
 @Setter @Getter
 public class User {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
     private String username;
